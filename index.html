@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사립대 사학재단 재정 구조 — 적립금 11조, 법인전입금 3.9%</title>
+<meta name="description" content="사립대학 사학재단의 법인전입금·수익용 기본재산·적립금을 학교알리미·대학정보공시 데이터로 추적한 탐사 보도 대시보드">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-2: #4a4a4a;
+    --bg: #fafaf7;
+    --line: #e6e2da;
+    --accent: #b8331f;
+    --accent-soft: #f4ddd7;
+    --gold: #b8923a;
+    --moss: #5d6b3a;
+  }
+  html, body { background: var(--bg); color: var(--ink); font-family: 'Noto Sans KR', sans-serif; }
+  .serif { font-family: 'Noto Serif KR', 'Noto Sans KR', serif; font-weight: 700; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .ink-2 { color: var(--ink-2); }
+  .border-line { border-color: var(--line); }
+  .bg-soft { background: var(--accent-soft); }
+  .text-accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .text-gold { color: var(--gold); }
+  .text-moss { color: var(--moss); }
+  .kpi-num { font-family: 'IBM Plex Mono', monospace; font-weight: 500; letter-spacing: -0.02em; }
+  table.data-table { border-collapse: collapse; width: 100%; }
+  table.data-table th, table.data-table td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; font-size: 14px; }
+  table.data-table th { background: #f0ece4; font-weight: 500; cursor: pointer; user-select: none; }
+  table.data-table th:hover { background: #e8e4dc; }
+  table.data-table tr:hover td { background: #f5f1e9; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 500; }
+  .badge-up { background: #f4ddd7; color: var(--accent); }
+  .badge-down { background: #e0e7d0; color: var(--moss); }
+  .channel-card { border: 1px solid var(--line); padding: 24px; background: white; position: relative; }
+  .channel-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+  details summary { cursor: pointer; list-style: none; padding: 8px 0; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .chart-wrap { position: relative; height: 320px; }
+  @media (max-width: 768px) { .chart-wrap { height: 280px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="border-b border-line bg-white">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-baseline gap-3">
+      <span class="serif text-lg">하네스 뉴스룸</span>
+      <span class="text-xs ink-2 uppercase tracking-widest">Sahak Finance Dashboard</span>
+    </div>
+    <div class="text-xs ink-2 mono">2026.05.30</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-14 pb-10">
+  <p class="text-sm ink-2 mb-3 mono uppercase tracking-widest">탐사 보도 · 사립대 재정 구조</p>
+  <h1 class="serif text-4xl md:text-5xl leading-tight mb-5">
+    적립금 <span class="text-accent">11조</span>,<br>
+    법인전입금 <span class="text-accent">3.9%</span>
+  </h1>
+  <p class="text-lg md:text-xl ink-2 leading-relaxed max-w-3xl">
+    사립대학 사학재단이 14년간 유지해 온 재정 구조를 학교알리미·대학정보공시·대학교육연구소 데이터로 추적했다.
+    법인이 학교에 책임을 얼마나 지는가, 학교가 받은 등록금이 어디로 가는가 — 두 질문이 거의 같은 답을 내놓고 있다.
+  </p>
+</section>
+
+<!-- KPI GRID -->
+<section class="max-w-6xl mx-auto px-6 pb-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-line border border-line">
+    <div class="bg-white p-7">
+      <p class="text-xs ink-2 mono uppercase tracking-wider mb-3">2024 누적 적립금</p>
+      <p class="kpi-num text-5xl">11.6<span class="text-2xl ink-2 ml-1">조 원</span></p>
+      <p class="text-sm ink-2 mt-3">전년 대비 +4,287억 (4년제 9조, 전문대 2.5조)</p>
+    </div>
+    <div class="bg-white p-7">
+      <p class="text-xs ink-2 mono uppercase tracking-wider mb-3">법인전입금 비율 (14년)</p>
+      <p class="kpi-num text-5xl">3.9<span class="text-2xl ink-2 ml-1">%</span></p>
+      <p class="text-sm ink-2 mt-3">2010년 3.9% → 2023년 3.9%, 동결</p>
+    </div>
+    <div class="bg-white p-7">
+      <p class="text-xs ink-2 mono uppercase tracking-wider mb-3">적립금 100억+ 증액 대학 중</p>
+      <p class="kpi-num text-5xl">16<span class="text-2xl ink-2 ml-1">/17</span></p>
+      <p class="text-sm ink-2 mt-3">2025년 등록금 인상 (호남대만 동결)</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: 14년 추세 -->
+<section class="bg-white border-y border-line py-16">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+      <h2 class="serif text-3xl">14년의 두 곡선</h2>
+      <span class="text-xs ink-2 mono">SECTION 01</span>
+    </div>
+    <p class="ink-2 mb-10 max-w-2xl">
+      등록금 의존도는 가파르게 내려갔다. 같은 기간 법인전입금 비율은 거의 움직이지 않았다.
+      두 곡선의 어긋남이 사립대 재정의 14년을 요약한다.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div>
+        <h3 class="font-medium mb-1">등록금 의존율 (사립대 평균)</h3>
+        <p class="text-xs ink-2 mb-4">출처: 한국사학진흥재단 사립대학재정통계연보</p>
+        <div class="chart-wrap"><canvas id="depChart"></canvas></div>
+      </div>
+      <div>
+        <h3 class="font-medium mb-1">법인전입금 비율 분포 (사립대 135곳, 2023)</h3>
+        <p class="text-xs ink-2 mb-4">출처: 대학교육연구소</p>
+        <div class="chart-wrap"><canvas id="distChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div>
+        <h3 class="font-medium mb-1">2024년 적립금 100억+ 증액한 17개 대학</h3>
+        <p class="text-xs ink-2 mb-4">출처: 대학교육연구소 「2024년 사립대 적립금 분석」</p>
+        <div class="chart-wrap" style="height: 460px"><canvas id="incChart"></canvas></div>
+      </div>
+      <div>
+        <h3 class="font-medium mb-1">2024 적립금 인출 vs 적립 (사립대·전문대 274곳)</h3>
+        <p class="text-xs ink-2 mb-4">예산 대비 결산 집행률. 출처: 대교연</p>
+        <div class="chart-wrap"><canvas id="flowChart"></canvas></div>
+        <div class="mt-4 p-4 bg-soft text-sm">
+          인출은 예산의 <span class="mono font-medium">81%</span>만 집행, 적립은 예산의 <span class="mono font-medium">153%</span>를 집행.
+          쓰기로 한 돈은 덜 쓰고, 쌓기로 한 돈에는 더 얹었다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: 의존형 vs 축적형 -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+    <h2 class="serif text-3xl">의존형과 축적형, 두 모델</h2>
+    <span class="text-xs ink-2 mono">SECTION 02</span>
+  </div>
+  <p class="ink-2 mb-10 max-w-3xl">
+    "사립대 적립금 11.6조"라는 단일 숫자는 두 모델의 문제를 뭉갠다.
+    법인 부담이 만성적으로 낮은 '의존형'과, 법정부담금을 어느 정도 지면서도 매년 수백억을 쌓는 '축적형'을 분리해서 봐야 한다.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white border border-line p-7">
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="badge badge-up">의존형</span>
+        <span class="text-xs ink-2">법인전입금 1% 미만</span>
+      </div>
+      <h3 class="serif text-xl mt-3 mb-4">학생 등록금이 운영을 떠받친다</h3>
+      <p class="text-sm ink-2 mb-5">서울 재학생 1만 명 이상 18개대 중 법인전입금 비율 1% 미만 6곳. 2023 회계연도.</p>
+      <table class="data-table">
+        <thead><tr><th>대학</th><th>비율</th><th>절대액</th></tr></thead>
+        <tbody>
+          <tr><td>성신여대</td><td class="mono">0.1%</td><td class="mono">1.2억</td></tr>
+          <tr><td>상명대</td><td class="mono">0.2%</td><td class="mono">10억 미만</td></tr>
+          <tr><td>숭실대</td><td class="mono">0.4%</td><td class="mono">—</td></tr>
+          <tr><td>서강대</td><td class="mono">0.4%</td><td class="mono">6.7억</td></tr>
+          <tr><td>숙명여대</td><td class="mono">0.4%</td><td class="mono">8.34억</td></tr>
+          <tr><td>세종대</td><td class="mono">0.5%</td><td class="mono">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white border border-line p-7">
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="badge badge-down">축적형</span>
+        <span class="text-xs ink-2">2024년 100억+ 증액 17곳 중 일부</span>
+      </div>
+      <h3 class="serif text-xl mt-3 mb-4">법정부담률과 적립 증가가 함께 가는 그룹</h3>
+      <p class="text-sm ink-2 mb-5">법정부담금은 일정 수준 부담하면서도 같은 해 적립금을 늘린 학교.</p>
+      <table class="data-table">
+        <thead><tr><th>대학</th><th>법정부담률</th><th>2024 증액</th></tr></thead>
+        <tbody>
+          <tr><td>연세대</td><td class="mono">104.7%</td><td class="mono">+365억</td></tr>
+          <tr><td>성균관대</td><td class="mono">100%</td><td class="mono">—</td></tr>
+          <tr><td>이화여대</td><td class="mono">62.2%</td><td class="mono">+204억</td></tr>
+          <tr><td>고려대</td><td class="mono">60.3%</td><td class="mono">+342억</td></tr>
+          <tr><td>홍익대</td><td class="mono">—</td><td class="mono">+334억</td></tr>
+          <tr><td>한양대</td><td class="mono">—</td><td class="mono">+317억</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: 누적 적립금 상위 10 -->
+<section class="bg-white border-y border-line py-16">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+      <h2 class="serif text-3xl">누적 적립금 상위 10</h2>
+      <span class="text-xs ink-2 mono">SECTION 03</span>
+    </div>
+    <p class="ink-2 mb-8 max-w-3xl">
+      대학교육연구소 본·분교 합산 기준. 헤더를 클릭하면 정렬됩니다.
+      베리타스알파의 본·분교 분리 기준에서는 1~3위 순위가 바뀔 수 있다.
+    </p>
+
+    <div class="overflow-x-auto">
+      <table class="data-table" id="topTable">
+        <thead>
+          <tr>
+            <th data-sort="rank" data-type="num">#</th>
+            <th data-sort="name" data-type="str">대학</th>
+            <th data-sort="amount" data-type="num">누적 적립금 (억)</th>
+            <th data-sort="inc" data-type="num">2024 증액 (억)</th>
+            <th>모델</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="text-xs ink-2 mt-3">출처: 대학교육연구소 「2024년 사립대 적립금 분석」(2025-09-08), 베리타스알파.</p>
+  </div>
+</section>
+
+<!-- SECTION 4: 통로 셋 -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+    <h2 class="serif text-3xl">제도가 허용해 온 통로 셋</h2>
+    <span class="text-xs ink-2 mono">SECTION 04</span>
+  </div>
+  <p class="ink-2 mb-10 max-w-3xl">
+    합법의 테두리 안에서 작동하는 세 가지 통로. 행정부의 시행령·규칙 차원에서 손볼 수 있다.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="channel-card">
+      <div class="text-xs mono ink-2 mb-2">통로 01</div>
+      <h3 class="serif text-xl mb-3">법정부담금 전가</h3>
+      <p class="text-sm ink-2 mb-4">
+        사학기관 재무·회계 규칙에 대한 특례규칙이 법인의 사학연금·건강보험 부족분을 교비로 메울 수 있게 허용.
+      </p>
+      <div class="border-t border-line pt-3 text-sm">
+        <span class="kpi-num text-3xl">76%</span>
+        <span class="ink-2 text-sm ml-2">사립학교법인 310개 중 전가</span>
+      </div>
+      <p class="text-xs ink-2 mt-2">2020년 국정감사 자료</p>
+    </div>
+
+    <div class="channel-card">
+      <div class="text-xs mono ink-2 mb-2">통로 02</div>
+      <h3 class="serif text-xl mb-3">건축적립금</h3>
+      <p class="text-sm ink-2 mb-4">
+        등록금회계에서 적립금으로 빠져나갈 수 있는 항목은 법령상 건축적립금 하나. 신축·증축 명목이면 누적 한도 없음.
+      </p>
+      <div class="border-t border-line pt-3 text-sm">
+        <span class="kpi-num text-3xl">46.3%</span>
+        <span class="ink-2 text-sm ml-2">누적 적립금 11.6조 중 건축</span>
+      </div>
+      <p class="text-xs ink-2 mt-2">대학지성 In&amp;Out 정리</p>
+    </div>
+
+    <div class="channel-card">
+      <div class="text-xs mono ink-2 mb-2">통로 03</div>
+      <h3 class="serif text-xl mb-3">수익용 기본재산 산식</h3>
+      <p class="text-sm ink-2 mb-4">
+        2024년 9월 「대학설립·운영 규정」 개정으로 확보율 분모가 '운영수익 총액' → '등록금·수강료 수입액'으로 축소.
+      </p>
+      <div class="border-t border-line pt-3 text-sm">
+        <span class="kpi-num text-3xl">96.8 → 100.6%</span>
+        <p class="ink-2 text-sm mt-1">산식 변경 효과</p>
+      </div>
+      <p class="text-xs ink-2 mt-2">한국사학진흥재단 통합공시</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: 인용 -->
+<section class="bg-white border-y border-line py-16">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="serif text-3xl mb-10">두 입장</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <blockquote class="border-l-2 border-line pl-5">
+        <p class="serif text-lg leading-relaxed mb-4">
+          "일부 대학에만 적립금이 많을 뿐, 대부분 사립대는 가용 적립금이 거의 없는 상황. 적립금으로 등록금 인상을 대체하라는 주장은 현실과 맞지 않는다."
+        </p>
+        <footer class="text-sm ink-2">— 한국사립대학총장협의회, 한국대학신문 인터뷰</footer>
+      </blockquote>
+
+      <blockquote class="border-l-2 border-line pl-5">
+        <p class="serif text-lg leading-relaxed mb-4">
+          "쌓아두기 논란의 중심에 있던 항목을 통계로 공개하면서 사립대 재정 논의가 막연한 추측이 아니라 자료로 가능해진 것."
+        </p>
+        <footer class="text-sm ink-2">— 성열환(한국사학진흥재단 재정통계분석부장), 한국대학신문 2025-12-29</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <details open>
+    <summary class="serif text-2xl">조사 방법·한계</summary>
+    <div class="text-sm ink-2 leading-relaxed space-y-3">
+      <p><strong class="text-ink">대상</strong> · 4년제 사립 일반대학과 일부 전문대학. 2010~2024 회계연도.</p>
+      <p><strong class="text-ink">자료</strong> · 대학알리미(academyinfo.go.kr), 대학재정알리미(uniarlimi.kasfo.or.kr), 한국사학진흥재단 「사립대학재정통계연보」, 대학교육연구소 정기 보고서, 국가법령정보센터, 보도 매체.</p>
+      <p><strong class="text-ink">한계</strong> · 본·분교 합산/분리 기준에 따라 적립금 1위가 바뀐다. 2024년 9월 「대학설립·운영 규정」 개정 이후 수익용 기본재산 확보율의 시계열 직접 비교가 어렵다. 법정부담금 전가의 정확한 특례규칙 조·항 번호, 박정원(대교연)의 정확한 직함, 한국사립대학총장협의회 입장문 원문 등은 발행 전 추가 확인 권고 사항으로 남아 있다.</p>
+      <p><strong class="text-ink">파이프라인</strong> · 하네스 뉴스룸 6단계(desk → beat-reporter → analyst → writer → factchecker → editor)를 거쳤다. 전체 산출물은 harness 저장소의 <code>_workspace/*_20260530_sahak.md</code>에 있다.</p>
+    </div>
+  </details>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-line bg-white py-10">
+  <div class="max-w-6xl mx-auto px-6 text-sm ink-2">
+    <div class="flex flex-wrap justify-between gap-4 mb-6">
+      <div>
+        <p class="serif text-base text-ink mb-1">하네스 뉴스룸 · 사학재단 재정 대시보드</p>
+        <p>탐사 보도 시리즈 · 발행 준비본</p>
+      </div>
+      <div class="text-right">
+        <p class="mono text-xs">build 20260530.sahak</p>
+        <p class="mono text-xs">data updated 2024 회계연도 기준</p>
+      </div>
+    </div>
+    <div class="border-t border-line pt-4">
+      <p class="mb-2"><strong class="text-ink">핵심 출처</strong></p>
+      <ul class="space-y-1 text-xs">
+        <li>· 대학교육연구소 「2024년 사립대 적립금 분석」(2025-09-08) <a class="underline" href="http://khei.re.kr/post/3269" target="_blank">khei.re.kr</a></li>
+        <li>· 경향신문 「전입금 '쥐꼬리'... 14년간 3.9% 동결」 2025-02-09 <a class="underline" href="https://www.khan.co.kr/article/202502092004015" target="_blank">khan.co.kr</a></li>
+        <li>· 한국대학신문 「사립대 재정, 어디에 쓰였나… 적립금 사용 현황 첫 공개」 2025-12-29 <a class="underline" href="https://news.unn.net/news/articleView.html?idxno=588118" target="_blank">unn.net</a></li>
+        <li>· 한국사학진흥재단 사립대학재정통계연보 <a class="underline" href="https://uniarlimi.kasfo.or.kr/" target="_blank">uniarlimi.kasfo.or.kr</a></li>
+        <li>· 대학알리미 <a class="underline" href="https://www.academyinfo.go.kr" target="_blank">academyinfo.go.kr</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const dep = {
+  labels: ['2013','2020','2021','2022','2023','2024'],
+  values: [65.2, 61.3, 60.3, 57.3, 50.1, 48.1]
+};
+
+const dist = {
+  labels: ['1% 미만 (40.7%)', '1~5% (38.6%)', '5% 초과 (20.7%)'],
+  values: [40.7, 38.6, 20.7]
+};
+
+const inc17 = [
+  ['연세대', 365], ['고려대', 342], ['홍익대', 334], ['한양대', 317],
+  ['이화여대', 204], ['울산대', 177], ['계명대', 161], ['가천대', 144],
+  ['수원대', 132], ['청주대', 129], ['호서대', 122], ['영남대', 120],
+  ['호남대', 118], ['동아대', 117], ['서강대', 112], ['단국대', 107],
+  ['차의과학대', 106]
+];
+
+const flow = {
+  labels: ['적립금 인출', '적립금 적립'],
+  budget: [11775, 9115],
+  actual: [9559, 13903]
+};
+
+const top10 = [
+  { rank: 1, name: '홍익대', amount: 8232, inc: 334, model: '축적형' },
+  { rank: 2, name: '연세대', amount: 6548, inc: 365, model: '축적형' },
+  { rank: 3, name: '이화여대', amount: 6328, inc: 204, model: '축적형' },
+  { rank: 4, name: '고려대', amount: 4530, inc: 342, model: '축적형' },
+  { rank: 5, name: '수원대', amount: 4158, inc: 132, model: '축적형' },
+  { rank: 6, name: '성균관대', amount: 3768, inc: null, model: '축적형' },
+  { rank: 7, name: '청주대', amount: 2775, inc: 129, model: '축적형' },
+  { rank: 8, name: '계명대', amount: 2769, inc: 161, model: '축적형' },
+  { rank: 9, name: '한양대', amount: 2711, inc: 317, model: '축적형' },
+  { rank: 10, name: '단국대', amount: 2065, inc: 107, model: '축적형' }
+];
+
+// ===== CHART DEFAULTS =====
+Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+Chart.defaults.color = '#4a4a4a';
+Chart.defaults.borderColor = '#e6e2da';
+
+const ACCENT = '#b8331f';
+const INK = '#1a1a1a';
+const MOSS = '#5d6b3a';
+const GOLD = '#b8923a';
+const SOFT = '#f4ddd7';
+
+// ===== 등록금 의존율 =====
+new Chart(document.getElementById('depChart'), {
+  type: 'line',
+  data: {
+    labels: dep.labels,
+    datasets: [{
+      label: '등록금 의존율 (%)',
+      data: dep.values,
+      borderColor: ACCENT, backgroundColor: SOFT,
+      tension: 0.25, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: ACCENT,
+      fill: true
+    }]
+  },
+  options: {
+    maintainAspectRatio: false, responsive: true,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + '%' } } },
+    scales: {
+      y: { min: 40, max: 70, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== 법인전입금 비율 분포 =====
+new Chart(document.getElementById('distChart'), {
+  type: 'doughnut',
+  data: {
+    labels: dist.labels,
+    datasets: [{
+      data: dist.values,
+      backgroundColor: [ACCENT, GOLD, MOSS],
+      borderWidth: 2, borderColor: '#fff'
+    }]
+  },
+  options: {
+    maintainAspectRatio: false, responsive: true, cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } },
+      tooltip: { callbacks: { label: c => c.parsed + '%' } }
+    }
+  }
+});
+
+// ===== 17곳 증액 =====
+const incLabels = inc17.map(x => x[0]);
+const incData = inc17.map(x => x[1]);
+new Chart(document.getElementById('incChart'), {
+  type: 'bar',
+  data: {
+    labels: incLabels,
+    datasets: [{
+      label: '2024 증액 (억 원)',
+      data: incData,
+      backgroundColor: ACCENT,
+      borderRadius: 2
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    maintainAspectRatio: false, responsive: true,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '+' + c.parsed.x + '억' } } },
+    scales: {
+      x: { ticks: { callback: v => v + '억' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== 인출 vs 적립 =====
+new Chart(document.getElementById('flowChart'), {
+  type: 'bar',
+  data: {
+    labels: flow.labels,
+    datasets: [
+      { label: '예산 (억)', data: flow.budget, backgroundColor: '#cfc7b8', borderRadius: 2 },
+      { label: '결산 (억)', data: flow.actual, backgroundColor: ACCENT, borderRadius: 2 }
+    ]
+  },
+  options: {
+    maintainAspectRatio: false, responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12 } },
+      tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y.toLocaleString() + '억' } }
+    },
+    scales: {
+      y: { ticks: { callback: v => v.toLocaleString() } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== TOP 10 TABLE =====
+function renderTopTable(rows) {
+  const tbody = document.querySelector('#topTable tbody');
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td class="mono">${r.rank}</td>
+      <td><strong>${r.name}</strong></td>
+      <td class="mono">${r.amount.toLocaleString()}</td>
+      <td class="mono">${r.inc !== null ? '+' + r.inc : '—'}</td>
+      <td><span class="badge badge-down">${r.model}</span></td>
+    </tr>
+  `).join('');
+}
+renderTopTable(top10);
+
+// Sort
+let sortState = { col: 'amount', dir: 'desc' };
+document.querySelectorAll('#topTable th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    const type = th.dataset.type;
+    sortState.dir = (sortState.col === col && sortState.dir === 'desc') ? 'asc' : 'desc';
+    sortState.col = col;
+    const sorted = [...top10].sort((a, b) => {
+      let va = a[col], vb = b[col];
+      if (va === null) va = -Infinity;
+      if (vb === null) vb = -Infinity;
+      if (type === 'num') return sortState.dir === 'desc' ? vb - va : va - vb;
+      return sortState.dir === 'desc' ? String(vb).localeCompare(String(va), 'ko') : String(va).localeCompare(String(vb), 'ko');
+    });
+    renderTopTable(sorted);
+  });
+});
+</script>
+
+</body>
+</html>
